@@ -48,9 +48,24 @@ def listening_thread():
                         message.lower()
                         if (message == "hey"):
                             send_message("Welcome to the stream, " + username)
+                        if message.lower() == "stars":
+                            send_message("   * \n" +
+                                         "  ***\n" +
+                                         " *****\n" +
+                                         "  ***\n" +
+                                         " *   *\n")
+                        if message.lower() == "smile":
+                            send_message(":)")
+                        if message.lower() == "shrug":
+                            send_message("¯\_(ツ)_/¯")
                     for l in parts:
                         if "End of /NAMES list" in l:
                             MODT = True
+
+        sleep(1.5)
+        k = take_input(s)
+        if k:
+            break
 
 class myThread(threading.Thread):
     def __init__(self, threadID, name, threadfunc):
@@ -64,11 +79,13 @@ class myThread(threading.Thread):
         print ("Existing " + self.name)
 
 
-def take_input():
+def take_input(s):
     while True:
         command = input()
         if command == "quit":
             s.close()
+            print('closing')
+            return True
         elif command[:3] == "ban":
             print(command)
         elif command == "join":
@@ -81,10 +98,12 @@ thread1 = myThread(1, "Thread-1", take_input)
 thread2 = myThread(2, "Thread-2", listening_thread)
 
 #Start new threads
-thread1.start()
+'''thread1.start()
 thread2.start()
 
-thread1.join()
+thread1.join()'''
+
+listening_thread()
 
 
 # try:
